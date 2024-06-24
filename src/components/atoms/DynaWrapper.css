@@ -1,0 +1,18 @@
+.dyna-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.dyna-wrapper--horizontal {
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.dyna-wrapper--vertical {
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+}

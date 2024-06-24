@@ -24,32 +24,3 @@ dist-ssr
 *.sw?
 
 *storybook.log
-// On future commits add the following files
-.storybook/main.ts
-.storybook/preview.ts
-src/stories/button.css
-src/stories/Button.stories.ts
-src/stories/Button.tsx
-src/stories/Configure.mdx
-src/stories/header.css
-src/stories/Header.stories.ts
-src/stories/Header.tsx
-src/stories/page.css
-src/stories/Page.stories.ts
-src/stories/Page.tsx
-src/stories/assets/accessibility.png
-src/stories/assets/accessibility.svg
-src/stories/assets/addon-library.png
-src/stories/assets/assets.png
-src/stories/assets/avif-test-image.avif
-src/stories/assets/context.png
-src/stories/assets/discord.svg
-src/stories/assets/docs.png
-src/stories/assets/figma-plugin.png
-src/stories/assets/github.svg
-src/stories/assets/share.png
-src/stories/assets/styling.png
-src/stories/assets/testing.png
-src/stories/assets/theming.png
-src/stories/assets/tutorials.svg
-src/stories/assets/youtube.svg
