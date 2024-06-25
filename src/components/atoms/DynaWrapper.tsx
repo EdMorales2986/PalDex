@@ -12,6 +12,10 @@ export const DynaWrapper = ({
   orientation = "horizontal",
   ...props
 }: DynaWrapperProps) => {
+  if (!["horizontal", "vertical"].includes(orientation)) {
+    throw new Error("Invalid orientation");
+  }
+
   return (
     <div className={`dyna-wrapper dyna-wrapper--${orientation}`} {...props}>
       {children}

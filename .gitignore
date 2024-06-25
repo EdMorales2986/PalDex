@@ -24,3 +24,13 @@ dist-ssr
 *.sw?
 
 *storybook.log
+coverage/base.css
+coverage/block-navigation.js
+coverage/clover.xml
+coverage/coverage-final.json
+coverage/favicon.png
+coverage/index.html
+coverage/prettify.css
+coverage/prettify.js
+coverage/sort-arrow-sprite.png
+coverage/sorter.js

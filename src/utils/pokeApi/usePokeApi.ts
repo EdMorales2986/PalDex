@@ -56,9 +56,9 @@ export function usePokemonPaginatedList(limit: number) {
 export function usePokemonDetails(name: string) {
   return useQuery({
     queryKey: ["pokemon", name],
-    queryFn: () => {
+    queryFn: async () => {
       try {
-        return pokeApi.pokemon.getPokemonByName(name);
+        return await pokeApi.pokemon.getPokemonByName(name);
       } catch (error) {
         throw new Error("Error fetching pokemon details");
       }

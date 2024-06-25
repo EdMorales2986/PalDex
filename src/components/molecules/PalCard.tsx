@@ -19,15 +19,25 @@ export const PalCard = ({ data, onClick }: PalCardProps) => {
         {/* Replace what's in here with a comp */}
         <img
           className="pal-card--img"
-          src={data?.sprites?.front_default}
+          src={
+            data?.sprites?.front_default ||
+            data?.sprites?.other?.dream_world?.front_default ||
+            data?.sprites?.other?.official_artwork?.front_default ||
+            data?.sprites?.other?.showdown?.front_default
+          }
           alt={data.name}
         />
       </div>
       <div className="pal-card--bottom">
-        <h3 className="pal-card--name">{capitalizeFirstLetter(data.name)}</h3>
+        <h3 className="pal-card--name">
+          {capitalizeFirstLetter(data?.name)} #{data?.id}
+        </h3>
         <div className="pal-card--types">
           {data.types.map((type: any) => (
-            <atoms.TypeLabel key={type.type.name} type={type.type.name} />
+            <atoms.TypeLabel
+              key={data.id + type.type.name}
+              type={type.type.name}
+            />
           ))}
         </div>
       </div>

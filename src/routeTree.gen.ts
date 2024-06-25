@@ -18,6 +18,7 @@ import { Route as rootRoute } from './routes/__root'
 
 const AboutLazyImport = createFileRoute('/about')()
 const IndexLazyImport = createFileRoute('/')()
+const AboutPokemonLazyImport = createFileRoute('/about/$pokemon')()
 
 // Create/Update Routes
 
@@ -30,6 +31,13 @@ const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+
+const AboutPokemonLazyRoute = AboutPokemonLazyImport.update({
+  path: '/$pokemon',
+  getParentRoute: () => AboutLazyRoute,
+} as any).lazy(() =>
+  import('./routes/about.$pokemon.lazy').then((d) => d.Route),
+)
 
 // Populate the FileRoutesByPath interface
 
@@ -49,6 +57,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutLazyImport
       parentRoute: typeof rootRoute
     }
+    '/about/$pokemon': {
+      id: '/about/$pokemon'
+      path: '/$pokemon'
+      fullPath: '/about/$pokemon'
+      preLoaderRoute: typeof AboutPokemonLazyImport
+      parentRoute: typeof AboutLazyImport
+    }
   }
 }
 
@@ -56,7 +71,7 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
-  AboutLazyRoute,
+  AboutLazyRoute: AboutLazyRoute.addChildren({ AboutPokemonLazyRoute }),
 })
 
 /* prettier-ignore-end */
@@ -75,7 +90,14 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "index.lazy.tsx"
     },
     "/about": {
-      "filePath": "about.lazy.tsx"
+      "filePath": "about.lazy.tsx",
+      "children": [
+        "/about/$pokemon"
+      ]
+    },
+    "/about/$pokemon": {
+      "filePath": "about.$pokemon.lazy.tsx",
+      "parent": "/about"
     }
   }
 }

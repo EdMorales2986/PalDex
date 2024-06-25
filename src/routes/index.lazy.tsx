@@ -12,9 +12,17 @@ export const Route = createLazyFileRoute("/")({
 function Index() {
   const [limit, setLimit] = useState(1);
   const pokemonPaginated = usePokemonPaginatedList(limit);
+  const spriteExists = (sprites: any) => {
+    return (
+      sprites?.front_default ||
+      sprites?.other?.dream_world?.front_default ||
+      sprites?.other?.official_artwork?.front_default ||
+      sprites?.other?.showdown?.front_default
+    );
+  };
 
-  // const [pokemons, setPokemons] = useState<any[]>([]);
   // Old code used to filter out duplicates -- no longer needed but kept for reference
+  // const [pokemons, setPokemons] = useState<any[]>([]);
   // useEffect(() => {
   //   if (pokemonPaginated.data) {
   //     setPokemons((prev) => {
@@ -50,7 +58,11 @@ function Index() {
         <div className="container">
           <atoms.DynaWrapper orientation="horizontal">
             {pokemonPaginated.data.map((pokemon: any) => (
-              <molecules.PalCard key={pokemon.name} data={pokemon} />
+              <div key={pokemon.name}>
+                {spriteExists(pokemon?.sprites) && (
+                  <molecules.PalCard data={pokemon} />
+                )}
+              </div>
             ))}
           </atoms.DynaWrapper>
         </div>
