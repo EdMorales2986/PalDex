@@ -1,6 +1,10 @@
 // import {describe, test, expect} from "vitest"
-import { TypeLabel } from "../components/atoms/TypeLabel.tsx";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { TypeLabel } from "./TypeLabel.tsx";
+import { render, screen, fireEvent, cleanup } from "@testing-library/react";
+
+afterEach(() => {
+  cleanup();
+});
 
 const onClick = vi.fn();
 
@@ -16,5 +20,12 @@ describe("TypeLabel", () => {
   test("onClick should be called", () => {
     fireEvent.click(screen.getByText("fire"));
     expect(onClick).toHaveBeenCalled();
+  });
+
+  test("invalid type should throw error", () => {
+    expect(() => {
+      // @ts-ignore
+      render(<TypeLabel type="invalid" />);
+    }).toThrowError("Invalid type");
   });
 });

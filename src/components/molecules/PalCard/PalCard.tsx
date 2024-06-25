@@ -1,7 +1,7 @@
 // import React from "react";
 import PropTypes from "prop-types";
 import "./PalCard.css";
-import atoms from "../atoms";
+import atoms from "../../atoms/index.tsx";
 
 export interface PalCardProps {
   data: any;

@@ -11,12 +11,21 @@ export default defineConfig({
   plugins: [react(), !isTest && TanStackRouterVite()],
   test: {
     environment: "jsdom",
-    setupFiles: "./src/tests/setup.ts",
     include: ["src/**/*.test.tsx", "src/**/*.test.ts"],
+    exclude: ["src/**/*.stories.tsx", "src/**/*.stories.ts"],
     globals: true,
     coverage: {
-      include: ["src/tests/**/*.ts", "src/tests/**/*.tsx"],
-      provider: "istanbul",
+      include: [
+        "src/components/atoms/**/*.tsx",
+        "src/components/molecules/**/*.tsx",
+      ],
+      exclude: [
+        "src/components/**/*index.tsx",
+        "src/components/atoms/**/*.stories.tsx",
+        "src/components/molecules/**/*.stories.tsx",
+      ],
+      provider: "v8",
+      reporter: ["text"],
     },
   },
 });

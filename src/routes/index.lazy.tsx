@@ -1,6 +1,6 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { atoms } from "../components/index.tsx";
+// import { atoms } from "../components/index.tsx";
 import { molecules } from "../components/index.tsx";
 import { usePokemonPaginatedList } from "../utils/pokeApi/usePokeApi.ts";
 import "./index.css";
@@ -56,7 +56,7 @@ function Index() {
 
       {pokemonPaginated.data && pokemonPaginated.isSuccess && (
         <div className="container">
-          <atoms.DynaWrapper orientation="horizontal">
+          <molecules.DynaWrapper orientation="horizontal">
             {pokemonPaginated.data.map((pokemon: any) => (
               <div key={pokemon.name}>
                 {spriteExists(pokemon?.sprites) && (
@@ -64,7 +64,7 @@ function Index() {
                 )}
               </div>
             ))}
-          </atoms.DynaWrapper>
+          </molecules.DynaWrapper>
         </div>
       )}
     </div>

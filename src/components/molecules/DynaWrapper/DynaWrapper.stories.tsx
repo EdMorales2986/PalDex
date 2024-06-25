@@ -1,5 +1,5 @@
 import { DynaWrapper } from "./DynaWrapper";
-import { PalCard } from "../molecules/PalCard";
+import { PalCard } from "../PalCard/PalCard.tsx";
 import { Meta, StoryObj } from "@storybook/react";
 // import { fn } from "@storybook/test";
 
@@ -12746,7 +12746,7 @@ const exData = {
 };
 
 const meta: Meta = {
-  title: "Atoms/DynaWrapper",
+  title: "Molecules/DynaWrapper",
   component: DynaWrapper,
   argTypes: {
     orientation: {

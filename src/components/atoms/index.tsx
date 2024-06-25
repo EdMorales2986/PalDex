@@ -1,9 +1,7 @@
-import { TypeLabel } from "./TypeLabel";
-import { DynaWrapper } from "./DynaWrapper";
+import { TypeLabel } from "./TypeLabel/TypeLabel.tsx";
 
 const atoms = {
   TypeLabel,
-  DynaWrapper,
 };
 
 export default atoms;

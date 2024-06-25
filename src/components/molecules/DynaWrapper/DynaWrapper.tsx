@@ -16,6 +16,10 @@ export const DynaWrapper = ({
     throw new Error("Invalid orientation");
   }
 
+  if (children === undefined) {
+    throw new Error("DynaWrapper must have at least one child");
+  }
+
   return (
     <div className={`dyna-wrapper dyna-wrapper--${orientation}`} {...props}>
       {children}
