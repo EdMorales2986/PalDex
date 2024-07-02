@@ -12,27 +12,20 @@ export const Route = createLazyFileRoute("/")({
 function Index() {
   const navigate = useNavigate();
   const [limit, setLimit] = useState(1);
+
+  // const [filteredData, setFilteredData] = useState([]);
+  // const [masterData, setMasterData] = useState([]);
+  // const [search, setSearch] = useState('');
+
+  // const [limit, setLimit] = useState(20);
   const pokemonPaginated = usePokemonPaginatedList(limit);
+
   const spriteExists = (sprites: any) => {
     return sprites?.front_default;
     // sprites?.other?.dream_world?.front_default ||
     // sprites?.other?.official_artwork?.front_default ||
     // sprites?.other?.showdown?.front_default
   };
-
-  // Old code used to filter out duplicates -- no longer needed but kept for reference
-  // const [pokemons, setPokemons] = useState<any[]>([]);
-  // useEffect(() => {
-  //   if (pokemonPaginated.data) {
-  //     setPokemons((prev) => {
-  //       const newPokemons = pokemonPaginated.data.filter(
-  //         (pokemon: any) => !prev.find((p) => p.name === pokemon.name)
-  //       );
-
-  //       return [...prev, ...newPokemons];
-  //     });
-  //   }
-  // }, [pokemonPaginated.isSuccess]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,6 +39,88 @@ function Index() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // const pokemonData:any = pokemonPaginated.data
+
+  // useEffect(() => {
+  //   if ( pokemonData) {
+  //     setFilteredData(pokemonData);
+  //     setMasterData(pokemonData);
+  //   }
+  // }, [ pokemonData]);
+
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (
+  //       window.innerHeight + document.documentElement.scrollTop ===
+  //       document.documentElement.offsetHeight
+  //     ) {
+  //       setLimit((prev) => prev + 20); // Augmenter la limite par incréments de 20
+  //     }
+  //   };
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
+
+  // const searchFilter = (text: string) => {
+  //   const searchText = text.toUpperCase();
+  //   if (searchText) {
+  //     const newData: any = pokemonPaginated.data?.filter((pokemon) =>
+  //       pokemon.name.toUpperCase().includes(searchText)
+  //     );
+
+  //     // console.log("NewData",newData)
+  //     setFilteredData(newData);
+  //     setMasterData(pokemonData);
+  //     setSearch(text);
+  //   } else {
+
+  //     // console.log("masterData",masterData)
+  //     setFilteredData(pokemonData);
+  //     setMasterData(pokemonData);
+  //     setSearch(text);
+  //   }
+  // };
+
+  // return (
+  //   <div>
+  //   {pokemonPaginated.isLoading ? (
+  //     <div className="containerr">
+  //     <div className="loader">
+  //       <atoms.Loader size={80} color="red" />
+  //     </div>
+  //     </div>
+  //   ) : (
+  //     <div className="container">
+  //       <div className="search-container">
+  //         <atoms.SearchBar
+  //           placeholder="Who is that pokemon? ..."
+  //           type="text"
+  //           onChange={(event) => searchFilter(event.target.value)}
+  //           value={search}
+  //         />
+  //       </div>
+  //       {pokemonPaginated.data && pokemonPaginated.isSuccess && filteredData && filteredData.length >= 0 ? (
+  //         <molecules.DynaWrapper orientation="horizontal">
+  //           {filteredData.map((pokemon: any) => (
+  //             <div key={pokemon.name}>
+  //               {spriteExists(pokemon?.sprites) && <molecules.PalCard data={pokemon} />}
+  //             </div>
+  //           ))}
+  //         </molecules.DynaWrapper>
+  //       ) : (
+  //         <molecules.DynaWrapper orientation="horizontal">
+  //           {pokemonPaginated.data?.map((pokemon: any) => (
+  //             <div key={pokemon.name}>
+  //               {spriteExists(pokemon?.sprites) && <molecules.PalCard data={pokemon} />}
+  //             </div>
+  //           ))}
+  //         </molecules.DynaWrapper>
+  //       )}
+  //     </div>
+  //   )}
+  // </div>
+  // );
 
   return (
     <div>
