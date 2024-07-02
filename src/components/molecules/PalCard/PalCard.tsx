@@ -9,15 +9,15 @@ export interface PalCardProps {
 }
 
 export const PalCard = ({ data, onClick }: PalCardProps) => {
-  const capitalizeFirstLetter = (string: string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
+  // const capitalizeFirstLetter = (string: string) => {
+  //   return string.charAt(0).toUpperCase() + string.slice(1);
+  // };
 
   return (
     <div className="pal-card" onClick={onClick}>
       <div className="pal-card--top">
         {/* Replace what's in here with a comp */}
-        <img
+        {/* <img
           className="pal-card--img"
           src={
             data?.sprites?.front_default ||
@@ -26,11 +26,12 @@ export const PalCard = ({ data, onClick }: PalCardProps) => {
             data?.sprites?.other?.showdown?.front_default
           }
           alt={data.name}
-        />
+        /> */}
+        <atoms.PalFrame data={data} />
       </div>
       <div className="pal-card--bottom">
         <h3 className="pal-card--name">
-          {capitalizeFirstLetter(data?.name)} #{data?.id}
+          {data?.name} #{data?.id}
         </h3>
         <div className="pal-card--types">
           {data.types.map((type: any) => (

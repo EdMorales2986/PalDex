@@ -28,4 +28,9 @@ describe("TypeLabel", () => {
       render(<TypeLabel type="invalid" />);
     }).toThrowError("Invalid type");
   });
+
+  test("default type should be unknown", () => {
+    render(<TypeLabel />);
+    expect(screen.getByText("unknown")).toBeDefined();
+  });
 });

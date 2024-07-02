@@ -1,4 +1,4 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
+import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 // import { atoms } from "../components/index.tsx";
 import { molecules } from "../components/index.tsx";
@@ -10,15 +10,14 @@ export const Route = createLazyFileRoute("/")({
 });
 
 function Index() {
+  const navigate = useNavigate();
   const [limit, setLimit] = useState(1);
   const pokemonPaginated = usePokemonPaginatedList(limit);
   const spriteExists = (sprites: any) => {
-    return (
-      sprites?.front_default ||
-      sprites?.other?.dream_world?.front_default ||
-      sprites?.other?.official_artwork?.front_default ||
-      sprites?.other?.showdown?.front_default
-    );
+    return sprites?.front_default;
+    // sprites?.other?.dream_world?.front_default ||
+    // sprites?.other?.official_artwork?.front_default ||
+    // sprites?.other?.showdown?.front_default
   };
 
   // Old code used to filter out duplicates -- no longer needed but kept for reference
@@ -60,7 +59,10 @@ function Index() {
             {pokemonPaginated.data.map((pokemon: any) => (
               <div key={pokemon.name}>
                 {spriteExists(pokemon?.sprites) && (
-                  <molecules.PalCard data={pokemon} />
+                  <molecules.PalCard
+                    data={pokemon}
+                    onClick={() => navigate({ to: `/about/${pokemon.name}` })}
+                  />
                 )}
               </div>
             ))}

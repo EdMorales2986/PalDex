@@ -27,6 +27,7 @@
   font-weight: bold;
   color: rgb(0, 0, 0);
   text-align: center;
+  text-transform: capitalize;
 }
 
 .pal-card--types {

@@ -1,0 +1,49 @@
+.stat-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.stat-bar--name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 180px;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  text-align: right;
+}
+.stat-bar--value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-left: 0.5rem;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  text-align: right;
+}
+
+.stat-bar--bar {
+  /* width: 100%; */
+  flex-grow: 1;
+  height: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  margin-left: 10px;
+  position: relative;
+}
+
+.stat-bar--fill {
+  height: 100%;
+  border-radius: 5px;
+  background-color: #008cff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: width 0.5s;
+}
