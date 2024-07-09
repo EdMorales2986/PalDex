@@ -5,7 +5,7 @@ import { molecules } from "../components/index.tsx";
 import { usePokemonPaginatedList } from "../utils/pokeApi/usePokeApi.ts";
 import "./index.css";
 import { usePokemonList } from '../utils/pokeApi/usePokeApi.ts';
-import Molecules from '../components/molecules/index';
+
 
 export const Route = createLazyFileRoute("/")({
   component: Index,
@@ -45,33 +45,34 @@ function Index() {
   // Si puedes ayudarme te lo agradeceria :)
 
 
-  // useEffect(() => {
+  useEffect(() => {
 
   
-  //   const filterData = () => {
+    const filterData = () => {
     
-  //     if (!search && !selectedType) {
-  //       // En caso que no exista alguna alteracion por filtro
-  //       return pokemonPaginated.data;
-  //     } else if (search) {
-  //       // solo barra de busqueda
-  //       return pokemonPaginated.data?.filter((pokemon) =>
-  //         pokemon.name.toUpperCase().includes(search.toUpperCase())
-  //       );
-  //     } else {
-  //       // Solo select de filtro
-  //       return pokemonPaginated.data?.filter((pokemon) =>
-  //         pokemon?.types?.some((typeObject) => typeObject?.type.name === selectedType)
-  //       );
-  //     }
-  //   };
-  //     const filteredData:any = filterData();
-  //   setFilteredData(filteredData);
-  //   }, [search, selectedType, limit, pokemonPaginated]);
+      if (!search && !selectedType) {
+        // En caso que no exista alguna alteracion por filtro
+        return pokemonPaginated.data;
+      } else if (search) {
+        // solo barra de busqueda
+        return pokemonList.data?.filter((pokemon) =>
+          pokemon.name.toUpperCase().includes(search.toUpperCase())
+        );
+      } else {
+        // Solo select de filtro
+        return pokemonPaginated.data?.filter((pokemon) =>
+          pokemon?.types?.some((typeObject) => typeObject?.type.name === selectedType.toLowerCase())
+        );
+      }
+    };
+      const dataFiltrada:any = filterData();
+    setFilteredData(dataFiltrada);
+    console.log("Filtered Data: ",dataFiltrada)
+    }, [search, selectedType, limit, pokemonPaginated]);
 
-  if(pokemonPaginated.data){
-    console.log("pokemonList: ", pokemonPaginated.data)
-  }
+  // if(pokemonPaginated.data){
+  //   console.log("pokemonList: ", pokemonPaginated.data)
+  // }
 
   // const handleMoveChange = (string: any) => {
   //   setSelectedMove(string);
