@@ -1,0 +1,27 @@
+.pal-type-dropdown {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  
+  .pal-type-select {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+  }
+  
+  .pal-type-select option {
+    background-color: #fff;
+    color: inherit;
+  }
+  
+  .pal-type-select option[value=""] {
+    color: #aaa;
+  }
