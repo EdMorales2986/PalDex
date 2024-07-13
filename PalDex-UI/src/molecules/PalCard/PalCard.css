@@ -1,0 +1,38 @@
+.pal-card {
+  display: flex;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  flex-direction: column;
+  width: fit-content;
+  height: fit-content;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(220, 220, 220);
+  border: rgb(100, 100, 100) 1px solid;
+  box-shadow: inset 0px 0px 3px rgb(82, 82, 82);
+  min-width: 200px;
+}
+
+.pal-card--img {
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border: rgb(100, 100, 100) 1px solid;
+  background-color: rgb(180, 180, 180);
+  object-fit: fill;
+}
+
+.pal-card--name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.pal-card--types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
