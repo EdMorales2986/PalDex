@@ -2,6 +2,7 @@ import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { atoms } from "../components/index.tsx";
 import { molecules } from "../components/index.tsx";
+// import { atoms, molecules } from "paldex-ui";
 import { usePokemonPaginatedList } from "../utils/pokeApi/usePokeApi.ts";
 import "./index.css";
 import { usePokemonList } from "../utils/pokeApi/usePokeApi.ts";

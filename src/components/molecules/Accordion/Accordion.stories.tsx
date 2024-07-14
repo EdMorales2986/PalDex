@@ -1,10 +1,10 @@
 import { Accordion } from "./Accordion";
 import { Meta, StoryObj } from "@storybook/react";
 
-export default {
-  title: "Molecules/Accordion",
-  component: Accordion,
-};
+// export default {
+//   title: "Molecules/Accordion",
+//   component: Accordion,
+// };
 
 const TemplateChild = () => (
   <div>
@@ -21,7 +21,7 @@ const TemplateChild = () => (
 
 const meta: Meta<typeof Accordion> = {
   component: Accordion,
-  title: "Accordion",
+  title: "Molecules/Accordion",
   argTypes: {
     label: {
       control: {
@@ -31,14 +31,17 @@ const meta: Meta<typeof Accordion> = {
   },
 };
 
-export const Basic: StoryObj<typeof Accordion> = {
+export default meta;
+type StoryType = StoryObj<typeof Accordion>;
+
+export const Basic: StoryType = {
   args: {
     label: "Accordion",
     children: <TemplateChild />,
   },
 };
 
-export const AccordionRecursion: StoryObj<typeof Accordion> = {
+export const AccordionRecursion: StoryType = {
   args: {
     label: "Outer Accordion",
     children: (

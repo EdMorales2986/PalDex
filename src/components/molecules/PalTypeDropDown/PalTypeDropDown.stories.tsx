@@ -1,35 +1,35 @@
+import { PalTypeDropDown } from "./PalTypeDropDown"; // Adjust the path if necessary
+import { Meta, StoryObj } from "@storybook/react";
 
-import { PalTypeDropDown } from './PalTypeDropDown'; // Adjust the path if necessary
-import { Meta, StoryObj } from '@storybook/react';
+// export default {
+//   title: 'Components/PalTypeDropDown',
+//   component: PalTypeDropDown,
+// };
 
-export default {
-  title: 'Components/PalTypeDropDown',
+const meta: Meta = {
   component: PalTypeDropDown,
+  title: "Molecules/PalTypeDropDown",
 };
 
-const meta: Meta<typeof PalTypeDropDown> = {
-  component: PalTypeDropDown,
-  title: 'PalTypeDropDown',
-};
+export default meta;
+// interface PalTypeDropDownProps {
+//   selectedType: string;
+//   onTypeChange: (type: string) => void;
+// }
+type StoryType = StoryObj<typeof PalTypeDropDown>;
 
-// Sample types for props (adjust if needed)
-interface PalTypeDropDownProps {
-  selectedType: string;
-  onTypeChange: (type: string) => void;
-}
-
-export const Basic: StoryObj<typeof PalTypeDropDown> = {
+export const Basic: StoryType = {
   args: {
-    selectedType: '', // Initial selected type (default: empty)
-    onTypeChange: (type:any) => console.log('Type changed:', type), // Mock function
+    selectedType: "", // Initial selected type (default: empty)
+    onTypeChange: (type: any) => console.log("Type changed:", type), // Mock function
   },
 };
 
 // Optional stories with different props
-export const PreselectedType: StoryObj<typeof PalTypeDropDown> = {
+export const PreselectedType: StoryType = {
   ...Basic,
   args: {
     ...Basic.args,
-    selectedType: 'Fire', // Pre-select a type
+    selectedType: "Fire", // Pre-select a type
   },
 };

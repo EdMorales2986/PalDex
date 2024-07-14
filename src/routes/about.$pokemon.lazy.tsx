@@ -4,7 +4,7 @@
 // } from "react";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { atoms } from "../components/index.tsx";
-import { molecules } from "../components/index.tsx";
+// import { molecules } from "../components/index.tsx";
 import { usePokemonDetails } from "../utils/pokeApi/usePokeApi";
 
 import "./about.css";
