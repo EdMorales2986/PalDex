@@ -36,3 +36,14 @@
   gap: 0.5rem;
   justify-content: center;
 }
+
+.pal-card--id {
+  font-size: 12px;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 20px;
+}

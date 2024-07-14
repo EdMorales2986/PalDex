@@ -1,16 +1,15 @@
-import { SearchBar} from "./SearchBar";
+import { SearchBar } from "./SearchBar";
 import { Meta, StoryObj } from "@storybook/react";
 
-
 const meta: Meta<typeof SearchBar> = {
-  title: "Components/SearchBar",
+  title: "Atoms/SearchBar",
   component: SearchBar,
   argTypes: {
-    onChange: { action: 'onChange' },
+    onChange: { action: "onChange" },
     type: {
       control: {
-        type: 'select',
-        options: ['text', 'email', 'password', 'number'],
+        type: "select",
+        options: ["text", "email", "password", "number"],
       },
     },
   },
@@ -22,31 +21,31 @@ type StoryType = StoryObj<typeof SearchBar>;
 
 export const Default: StoryType = {
   args: {
-    value: '',
-    placeholder: 'Search...',
+    value: "",
+    placeholder: "Search...",
   },
 };
 
 export const WithLabel: StoryType = {
   args: {
-    label: 'Search',
-    value: '',
-    placeholder: 'Search...',
+    label: "Search",
+    value: "",
+    placeholder: "Search...",
   },
 };
 
 export const WithType: StoryType = {
   args: {
-    value: '',
-    type: 'number',
-    placeholder: 'Enter a number',
+    value: "",
+    type: "number",
+    placeholder: "Enter a number",
   },
 };
 
 export const WithClassName: StoryType = {
   args: {
-    value: '',
-    placeholder: 'Search...',
-    className: 'custom-search-bar',
+    value: "",
+    placeholder: "Search...",
+    className: "custom-search-bar",
   },
 };

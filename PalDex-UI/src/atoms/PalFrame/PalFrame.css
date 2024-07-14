@@ -4,5 +4,10 @@
   border-radius: 0.5rem;
   border: rgb(100, 100, 100) 1px solid;
   background-color: rgb(180, 180, 180);
-  object-fit: fill;
+  height: 150px;
+  width: 150px;
+}
+
+img {
+  object-fit: none;
 }

@@ -4,8 +4,7 @@ import { atoms } from "../components/index.tsx";
 import { molecules } from "../components/index.tsx";
 import { usePokemonPaginatedList } from "../utils/pokeApi/usePokeApi.ts";
 import "./index.css";
-import { usePokemonList } from '../utils/pokeApi/usePokeApi.ts';
-
+import { usePokemonList } from "../utils/pokeApi/usePokeApi.ts";
 
 export const Route = createLazyFileRoute("/")({
   component: Index,
@@ -14,69 +13,40 @@ export const Route = createLazyFileRoute("/")({
 function Index() {
   const navigate = useNavigate();
   const [limit, setLimit] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const [filteredData, setFilteredData] = useState([]);
-  const [masterData, setMasterData] = useState([]);
-  const [search, setSearch] = useState('');
-  // const [selectedMove, setSelectedMove] = useState(null);
+  const [filteredData, setFilteredData] = useState<any[]>([]);
+  const [filterUsed, usingFilter] = useState(false);
+  const [search, setSearch] = useState("");
+  const [selectedType, setSelectedType] = useState("");
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [masterData, setMasterData] = useState([]);
 
   const pokemonPaginated = usePokemonPaginatedList(limit);
+  const pokemonList = usePokemonList();
 
-  const pokemonList = usePokemonList()
-
-  console.log("pokemonPaginated: ", pokemonPaginated.data)
-
-  const [selectedType, setSelectedType] = useState('');
-
-  const handleTypeChange = (newType: any) => {
-    setSelectedType(newType);
-    console.log(selectedType)
-
-     
-  };
-
-  useEffect(() => {
-    console.log('Selected type:', selectedType);
-  }, [selectedType]);
-
-
-
-  //Este useEffeect es el que me redefiniria "filteredData" que es aquel en el que se renderizan los pokemones a partir de algun tipo de filtrado
-  // Si puedes ayudarme te lo agradeceria :)
-
-
-  useEffect(() => {
-
-  
-    const filterData = () => {
-    
-      if (!search && !selectedType) {
-        // En caso que no exista alguna alteracion por filtro
-        return pokemonPaginated.data;
-      } else if (search) {
-        // solo barra de busqueda
-        return pokemonList.data?.filter((pokemon) =>
-          pokemon.name.toUpperCase().includes(search.toUpperCase())
-        );
-      } else {
-        // Solo select de filtro
-        return pokemonPaginated.data?.filter((pokemon) =>
-          pokemon?.types?.some((typeObject) => typeObject?.type.name === selectedType.toLowerCase())
-        );
-      }
-    };
-      const dataFiltrada:any = filterData();
-    setFilteredData(dataFiltrada);
-    console.log("Filtered Data: ",dataFiltrada)
-    }, [search, selectedType, limit, pokemonPaginated]);
-
-  // if(pokemonPaginated.data){
-  //   console.log("pokemonList: ", pokemonPaginated.data)
-  // }
-
-  // const handleMoveChange = (string: any) => {
-  //   setSelectedMove(string);
+  // With the changes made by me, DIO!!!, this useEffect is not needed anymore
+  // const handleTypeChange = (newType: any) => {
+  //   setSelectedType(newType);
   // };
+  // this belongs to francisco
+  // useEffect(() => {
+  //   const data = () => {
+  //     if (search) {
+  //       // solo barra de busqueda
+  //       return pokemonList.data?.filter((pokemon) =>
+  //         pokemon.name.toUpperCase().includes(search.toUpperCase())
+  //       );
+  //     } else if (selectedType) {
+  //       // Solo select de filtro
+  //       return pokemonList.data?.filter((pokemon) =>
+  //         pokemon?.types?.some(
+  //           (typeObject) => typeObject?.type.name === selectedType.toLowerCase()
+  //         )
+  //       );
+  //     }
+  //   };
+  //   setFilteredData(data());
+  //   // console.log("Filtered Data: ", filteredData);
+  // }, [search, selectedType]);
 
   const spriteExists = (sprites: any) => {
     return sprites?.front_default;
@@ -85,127 +55,174 @@ function Index() {
     // sprites?.other?.showdown?.front_default
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (search) {
-        return; // Si search está definida y existe, no se ejecuta el handleScroll
-      }
-      const scrollHeight = document.documentElement.scrollHeight;
-      const scrollTop = document.documentElement.scrollTop;
-      const clientHeight = document.documentElement.clientHeight;
-  
-      // Calcular el porcentaje de la página que ha sido scrolleada
-      const scrolledPercentage = (scrollTop + clientHeight) / scrollHeight * 100;
-  
-      // Establecer un porcentaje mínimo, por ejemplo 80%
-      const minPercentage = 95;
+  // Francisco this doesn't work as expected
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (search) {
+  //       return; // Si search está definida y existe, no se ejecuta el handleScroll
+  //     }
+  //     const scrollHeight = document.documentElement.scrollHeight;
+  //     const scrollTop = document.documentElement.scrollTop;
+  //     const clientHeight = document.documentElement.clientHeight;
 
-      
-  
-      if ( limit<=11 && pokemonPaginated.data && !pokemonPaginated.isLoading && scrolledPercentage >= minPercentage ) {
-        setIsLoading(true);
-        setLimit((prev) => prev + 1);
-        console.log("limit: ",limit)
-      }
-    };
+  //     // Calcular el porcentaje de la página que ha sido scrolleada
+  //     const scrolledPercentage =
+  //       ((scrollTop + clientHeight) / scrollHeight) * 100;
 
+  //     // Establecer un porcentaje mínimo, por ejemplo 80%
+  //     const minPercentage = 95;
 
+  //     if (
+  //       limit <= 11 &&
+  //       pokemonPaginated.data &&
+  //       !pokemonPaginated.isLoading &&
+  //       scrolledPercentage >= minPercentage
+  //     ) {
+  //       setIsLoading(true);
+  //       setLimit((prev) => prev + 1);
+  //     }
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [search, limit, pokemonPaginated]);
-
-  const pokemonData:any = pokemonPaginated.data
-
-  useEffect(() => {
-    if ( pokemonData) {
-      setFilteredData(pokemonData);
-      setMasterData(pokemonData);
-      setIsLoading(false);
-    }
-  }, [ pokemonData]);
-
-
-
-  
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, [search, limit, pokemonPaginated]);
 
   const searchFilter = (text: string) => {
     const searchText = text.toUpperCase();
     if (searchText) {
+      usingFilter(true);
       const newData: any = pokemonList.data?.filter((pokemon) =>
         pokemon.name.toUpperCase().includes(searchText)
       );
-
-      // console.log("NewData",newData)
       setFilteredData(newData);
-      setMasterData(pokemonData);
       setSearch(text);
     } else {
-
-      // console.log("masterData",masterData)
-      setFilteredData(pokemonData);
-      setMasterData(pokemonData);
+      usingFilter(false);
       setSearch(text);
     }
   };
 
+  const selectFilter = (type: string) => {
+    if (type) {
+      usingFilter(true);
+      const newData: any = pokemonList.data?.filter((pokemon) =>
+        pokemon?.types?.some(
+          (typeObject) => typeObject?.type.name === type.toLowerCase()
+        )
+      );
+      setFilteredData(newData);
+      setSelectedType(type);
+    } else {
+      usingFilter(false);
+      setSelectedType(type);
+    }
+  };
+
+  useEffect(() => {
+    if (filterUsed || search) {
+      return;
+    }
+
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop !==
+        document.documentElement.offsetHeight
+      )
+        return;
+      setLimit((prev) => prev + 1);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [filterUsed]);
+
   return (
     <div>
-    {pokemonPaginated.isLoading  || isLoading ?(
-      <div className="containerr">
-      <div className="loader">
-        <atoms.Loader size={80} color="red" />
-      </div>
-      </div>
-    ) : (
-      <div className="container">
-        <div className="search-container">
-          <atoms.SearchBar
-            placeholder="Who is that pokemon? ..."
-            type="text"
-            onChange={(event) => searchFilter(event.target.value)}
-            value={search}
-          />
-           {/* Dropdown Menu */}
-            <div className="move-dropdown">
-          <molecules.PalTypeDropDown 
-              selectedType={selectedType}
-            onTypeChange={handleTypeChange}
-            />
-
-        
-              </div>
-
+      {pokemonPaginated.isLoading ? (
+        <div className="containerr">
+          <div>
+            {/* <atoms.Loader size={80} color="red" /> */}
+            <atoms.Loader />
+          </div>
         </div>
-        {pokemonPaginated.data && pokemonPaginated.isSuccess && filteredData && filteredData.length >= 0 ? (
-          <molecules.DynaWrapper orientation="horizontal">
-            {filteredData.map((pokemon: any) => (
-              <div key={pokemon.name}>
-                {spriteExists(pokemon?.sprites) &&  
-                <molecules.PalCard
-                    data={pokemon}
-                    onClick={() => navigate({ to: `/about/${pokemon.name}` })}
-                  />}
-              </div>
-            ))}
-          </molecules.DynaWrapper>
-        ) : (
-          <molecules.DynaWrapper orientation="horizontal">
-            {pokemonPaginated.data?.map((pokemon: any) => (
-              <div key={pokemon.name}>
-                {spriteExists(pokemon?.sprites) &&  
-                <molecules.PalCard
-                    data={pokemon}
-                    onClick={() => navigate({ to: `/about/${pokemon.name}` })}
-                  />}
-              </div>
-            ))}
-          </molecules.DynaWrapper>
-        )}
-      </div>
-    )}
-  </div>
+      ) : (
+        <div className="container">
+          <div className="top">
+            <atoms.SearchBar
+              placeholder="Who is that pokemon?"
+              type="text"
+              onChange={(event) => searchFilter(event.target.value)}
+              value={search}
+            />
+            <div className="move-dropdown">
+              <molecules.PalTypeDropDown
+                selectedType={selectedType}
+                onTypeChange={(event) => {
+                  console.log(event);
+                  selectFilter(event);
+                }}
+              />
+            </div>
+          </div>
+
+          <div className="bottom">
+            {filterUsed && filteredData.length > 0 ? (
+              <molecules.DynaWrapper orientation="horizontal">
+                {filteredData.map((pokemon: any) => (
+                  <div key={pokemon.name}>
+                    {spriteExists(pokemon?.sprites) && (
+                      <molecules.PalCard
+                        data={pokemon}
+                        onClick={() =>
+                          navigate({ to: `/about/${pokemon.name}` })
+                        }
+                      />
+                    )}
+                  </div>
+                ))}
+              </molecules.DynaWrapper>
+            ) : (
+              <molecules.DynaWrapper orientation="horizontal">
+                {pokemonPaginated.data?.map((pokemon: any) => (
+                  <div key={pokemon.name}>
+                    {spriteExists(pokemon?.sprites) && (
+                      <molecules.PalCard
+                        data={pokemon}
+                        onClick={() =>
+                          navigate({ to: `/about/${pokemon.name}` })
+                        }
+                      />
+                    )}
+                  </div>
+                ))}
+              </molecules.DynaWrapper>
+            )}
+          </div>
+
+          {pokemonPaginated.isFetching && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: "10px",
+                margin: "10px",
+              }}
+            >
+              <atoms.Loader />
+            </div>
+          )}
+
+          <button
+            className="scroll-top-button"
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          >
+            UP
+          </button>
+        </div>
+      )}
+    </div>
   );
-
-
 }

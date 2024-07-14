@@ -1,50 +1,61 @@
-
-import { Accordion } from './Accordion'; // Adjust the path if necessary
-import { Meta, StoryObj } from '@storybook/react';
+import { Accordion } from "./Accordion";
+import { Meta, StoryObj } from "@storybook/react";
 
 export default {
-  title: 'Components/Accordion',
+  title: "Molecules/Accordion",
   component: Accordion,
 };
 
+const TemplateChild = () => (
+  <div>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce luctus
+    rhoncus pellentesque. Praesent id velit nec ante convallis eleifend. Quisque
+    venenatis porta tristique. In maximus, quam ac varius laoreet, ipsum ligula
+    aliquam orci, vel gravida ante nisl nec tortor. Cras in justo ornare,
+    faucibus neque nec, faucibus orci. Praesent nibh lacus, dapibus vitae sapien
+    nec, viverra pulvinar felis. Sed elementum dui magna, et ultrices elit
+    egestas vel. Duis porta malesuada mattis. Morbi at nunc eget nisl laoreet
+    viverra. Etiam sed lacinia lorem.
+  </div>
+);
+
 const meta: Meta<typeof Accordion> = {
   component: Accordion,
-  title: 'Accordion',
+  title: "Accordion",
   argTypes: {
-    data: {
-      control: { type: 'object' },
-      description: 'Data for accordion items',
+    label: {
+      control: {
+        type: "text",
+      },
     },
   },
 };
 
 export const Basic: StoryObj<typeof Accordion> = {
   args: {
-    data: [
-      {
-        move: { name: 'Tackle' },
-        description: 'A basic attack that deals damage to the opponent.',
-      },
-      {
-        move: { name: 'Ember' },
-        description: 'A fiery attack that deals fire-type damage to the opponent.',
-      },
-    ],
+    label: "Accordion",
+    children: <TemplateChild />,
   },
 };
 
-export const Expanded: StoryObj<typeof Accordion> = {
-  ...Basic,
+export const AccordionRecursion: StoryObj<typeof Accordion> = {
   args: {
-    ...Basic.args,
-
+    label: "Outer Accordion",
+    children: (
+      <>
+        <TemplateChild />
+        <Accordion label="Inner Accordion">
+          <TemplateChild />
+        </Accordion>
+      </>
+    ),
   },
 };
 
-export const ActiveItem: StoryObj<typeof Accordion> = {
-  ...Basic,
-  args: {
-    ...Basic.args,
+// export const ActiveItem: StoryObj<typeof Accordion> = {
+//   ...Basic,
+//   args: {
+//     ...Basic.args,
 
-  },
-};
+//   },
+// };

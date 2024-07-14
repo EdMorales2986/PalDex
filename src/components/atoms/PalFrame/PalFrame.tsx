@@ -12,14 +12,26 @@ export interface PalFrameProps {
 export const PalFrame = ({ data, ...props }: PalFrameProps) => {
   const [imageSrc, setImageSrc] = useState(data?.sprites?.front_default);
 
+  const handleEnter = () => {
+    if (data?.sprites?.back_default) {
+      setImageSrc(data?.sprites?.back_default);
+    }
+  };
+
+  const handleLeave = () => {
+    if (data?.sprites?.front_default) {
+      setImageSrc(data?.sprites?.front_default);
+    }
+  };
+
   return (
     <img
       className="sprite"
       src={imageSrc}
       alt={data?.name}
       {...props}
-      onMouseEnter={() => setImageSrc(data?.sprites?.back_default)}
-      onMouseLeave={() => setImageSrc(data?.sprites?.front_default)}
+      onMouseEnter={() => handleEnter()}
+      onMouseLeave={() => handleLeave()}
     />
   );
 };

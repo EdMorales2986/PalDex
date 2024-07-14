@@ -1,21 +1,30 @@
-.container {
+/* .container {
   display: grid;
   grid-template-areas:
     "search search"
     "content content";
   grid-auto-flow: dense;
   margin-top: 5rem;
-}
+} */
 
-.search-container {
-  grid-area: search;
+.container {
   display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
+  flex-direction: column;
 }
 
-.content-area {
-  grid-area: content;
+.bottom {
+  /* background-color: red; */
+  display: flex;
+  grid-auto-flow: dense;
+}
+
+.top {
+  /* background-color: aqua; */
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .containerr {
@@ -23,11 +32,20 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-
 }
 
-
-
-
-
-
+.scroll-top-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #3968c0;
+  color: white;
+  border: none;
+  border-radius: 50% 20% 50% 20%;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  z-index: 1000;
+  border: white 2px solid;
+}

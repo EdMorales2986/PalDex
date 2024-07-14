@@ -3,17 +3,24 @@ import { pokeApi } from "./api.ts";
 
 async function PokeQueryListFn() {
   try {
-    const pokemons = await pokeApi.pokemon
-      .listPokemons(0, 10000)
-      .then((res) => {
-        res.results.forEach(async (pokemon, index) => {
-          const extraInfo = await pokeApi.pokemon.getPokemonByName(
-            pokemon.name
-          );
-          res.results[index] = { ...pokemon, ...extraInfo };
-        });
-        return res.results;
-      });
+    const { results } = await pokeApi.pokemon.listPokemons(0, 10000);
+    // .then((res) => {
+    //   res.results.forEach(async (pokemon, index) => {
+    //     const extraInfo = await pokeApi.pokemon.getPokemonByName(
+    //       pokemon.name
+    //     );
+    //     res.results[index] = { ...pokemon, ...extraInfo };
+    //   });
+    //   return res.results;
+    // });
+
+    const pokemons = await Promise.all(
+      results.map(async (pokemon) => {
+        const extraInfo = await pokeApi.pokemon.getPokemonByName(pokemon.name);
+        return { ...pokemon, ...extraInfo };
+      })
+    );
+
     return pokemons;
   } catch (error) {
     throw new Error("Error fetching pokemon list");

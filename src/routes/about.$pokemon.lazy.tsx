@@ -13,37 +13,35 @@ export const Route = createLazyFileRoute("/about/$pokemon")({
   component: AboutPokemon,
 });
 
-
-
 function AboutPokemon() {
   const { pokemon } = Route.useParams();
   const { data, isLoading, isSuccess } = usePokemonDetails(pokemon);
-
-  console.log(typeof(data?.moves))
-  
-  console.log(data?.moves)
-
 
   // useEffect(() => {
   //   console.log(data);
   // }, [data && isSuccess]);
 
-  function formatPalId(id: any, name:any ) {
-    let formattedId = '';
-    if (id < 10) {
-      formattedId = `N.º 000${id}`;
-    } else if (id < 100) {
-      formattedId = `N.º 00${id}`;
-    } else if (id < 1000) {
-      formattedId = `N.º 0${id}`;
-    } else {
-      formattedId = `N.º ${id}`;
-    }
-    
-    const formattedName = (name) ? name.toUpperCase() : '';
-    
-    return `${formattedId} ${formattedName}`;
-  }
+  // there is a better way to do this..
+  // function formatPalId(id: any, name:any ) {
+  //   let formattedId = '';
+  //   if (id < 10) {
+  //     formattedId = `N.º 000${id}`;
+  //   } else if (id < 100) {
+  //     formattedId = `N.º 00${id}`;
+  //   } else if (id < 1000) {
+  //     formattedId = `N.º 0${id}`;
+  //   } else {
+  //     formattedId = `N.º ${id}`;
+  //   }
+
+  //   const formattedName = (name) ? name.toUpperCase() : '';
+
+  //   return `${formattedId} ${formattedName}`;
+  // }
+
+  const formatPalId = (id: any) => {
+    return id.toString().padStart(4, "0");
+  };
 
   return (
     <div>
@@ -53,18 +51,15 @@ function AboutPokemon() {
         <div className="container">
           <div className="dataContainer">
             <div className="leftSide">
-            
               <atoms.PalFrame data={data} />
               <div>
-                {formatPalId(data?.id, data?.name)}
+                {formatPalId(data?.id) + " " + data?.name?.toUpperCase()}
               </div>
               <div className="pal-types">
                 {data?.types?.map((type: any) => (
                   <atoms.TypeLabel key={type.type.name} type={type.type.name} />
                 ))}
               </div>
-
-            
             </div>
 
             <div className="rightSide">
@@ -79,22 +74,14 @@ function AboutPokemon() {
               ))}
             </div>
 
-            
-           <div>
-            
-           <div className="Accordion">
+            <div>
+              {/* <div className="Accordion">
                 <molecules.Accordion 
                 data = {data.moves}/>
             
+            </div> */}
             </div>
-
-           </div>
           </div>
-
-          
-       
-
-
         </div>
       )}
     </div>

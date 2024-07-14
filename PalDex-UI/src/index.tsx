@@ -1,4 +1,4 @@
-import atoms from "./atoms";
-import molecules from "./molecules";
+import atoms from "./atoms/index";
+import molecules from "./molecules/index";
 
 export { atoms, molecules };

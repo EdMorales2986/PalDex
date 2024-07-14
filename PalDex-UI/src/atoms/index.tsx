@@ -1,8 +1,8 @@
-import { TypeLabel } from "./TypeLabel/TypeLabel.js";
-import { PalStatBar } from "./PalStatBar/PalStatBar.js";
-import { PalFrame } from "./PalFrame/PalFrame.js";
-import { SearchBar } from "./SearchBar/SearchBar.js";
-import { Loader } from "./Loader/Loader.js";
+import { TypeLabel } from "./TypeLabel/TypeLabel";
+import { PalStatBar } from "./PalStatBar/PalStatBar";
+import { PalFrame } from "./PalFrame/PalFrame";
+import { SearchBar } from "./SearchBar/SearchBar";
+import { Loader } from "./Loader/Loader";
 
 const atoms = {
   TypeLabel,

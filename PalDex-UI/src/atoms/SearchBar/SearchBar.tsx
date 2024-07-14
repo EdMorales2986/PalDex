@@ -1,7 +1,6 @@
-import  { ChangeEvent,  HTMLInputTypeAttribute } from 'react';
+import { ChangeEvent, HTMLInputTypeAttribute } from "react";
 import PropTypes from "prop-types";
 import "./SearchBar.css";
-
 
 export interface SearchBarProps {
   label?: string;
@@ -16,9 +15,9 @@ export const SearchBar = ({
   label,
   value,
   onChange,
-  type = 'text',
-  placeholder = '',
-  className = '',
+  type = "text",
+  placeholder = "",
+  className = "",
 }: SearchBarProps) => {
   return (
     <div className={`input-group ${className}`}>
@@ -34,15 +33,11 @@ export const SearchBar = ({
   );
 };
 
-
 SearchBar.propTypes = {
   label: PropTypes.string,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  type: PropTypes.oneOf(['text', 'email', 'password', 'number']),
+  type: PropTypes.oneOf(["text", "email", "password", "number"]),
   placeholder: PropTypes.string,
   className: PropTypes.string,
 };
-
-
-

@@ -3,11 +3,11 @@ import { PalCard } from "./PalCard/PalCard.tsx";
 import { Accordion } from "./Accordion/Accordion.tsx";
 import { PalTypeDropDown } from "./PalTypeDropDown/PalTypeDropDown.tsx";
 
-const Molecules = {
+const molecules = {
   PalCard,
   DynaWrapper,
   Accordion,
-  PalTypeDropDown
+  PalTypeDropDown,
 };
 
-export default Molecules;
+export default molecules;

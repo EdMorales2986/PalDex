@@ -1,39 +1,45 @@
-import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
-import { expect } from 'chai';
-import { SearchBar } from './SearchBar';
+import React from "react";
+import { render, fireEvent, screen } from "@testing-library/react";
+import { expect } from "chai";
+import { SearchBar } from "./SearchBar";
 
-describe('SearchBar', () => {
-  it('renders an input element', () => {
+describe("SearchBar", () => {
+  it("renders an input element", () => {
     // Arrange
     render(<SearchBar value="" onChange={() => {}} />);
 
     // Assert
-    expect(screen.getByRole('textbox')).to.exist;
+    expect(screen.getByRole("textbox")).to.exist;
   });
 
-  it('calls the onChange handler when the input value changes', () => {
+  it("calls the onChange handler when the input value changes", () => {
     // Arrange
-    let inputValue = '';
+    let inputValue = "";
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       inputValue = event.target.value;
     };
 
     // Act
     render(<SearchBar value={inputValue} onChange={onChange} />);
-    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'test' } });
+    fireEvent.change(screen.getByRole("textbox"), {
+      target: { value: "test" },
+    });
 
     // Assert
-    expect(inputValue).to.equal('test');
+    expect(inputValue).to.equal("test");
   });
 
-  it('displays the correct value in the input', () => {
+  it("displays the correct value in the input", () => {
     // Arrange
-    const value = 'Hello, world!';
+    const value = "Hello, world!";
 
     // Act
     render(<SearchBar value={value} onChange={() => {}} />);
+  });
 
-
+  it("renders a label element when the label prop is provided", () => {
+    const label = "Search";
+    render(<SearchBar label={label} value="" onChange={() => {}} />);
+    expect(screen.getByText(label)).to.exist;
   });
 });
