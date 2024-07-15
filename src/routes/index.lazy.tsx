@@ -139,12 +139,9 @@ function Index() {
 
   return (
     <div>
-      {pokemonPaginated.isLoading ? (
+      {pokemonPaginated.isLoading || pokemonList.isLoading ? (
         <div className="containerr">
-          <div>
-            {/* <atoms.Loader size={80} color="red" /> */}
-            <atoms.Loader />
-          </div>
+          <atoms.Loader />
         </div>
       ) : (
         <div className="container">
@@ -167,7 +164,7 @@ function Index() {
           </div>
 
           <div className="bottom">
-            {filterUsed && filteredData.length > 0 ? (
+            {filterUsed && filteredData && filteredData.length > 0 ? (
               <molecules.DynaWrapper orientation="horizontal">
                 {filteredData.map((pokemon: any) => (
                   <div key={pokemon.name}>
